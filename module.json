@@ -34,6 +34,9 @@
     "changelog": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md",
     "relationships": {},
     "esmodules": [
-        "module/scripts/itemTags.js"
+        "./module/scripts/module.js"
+    ],
+    "styles": [
+        "module/styles/documentTags.css"
     ]
 }

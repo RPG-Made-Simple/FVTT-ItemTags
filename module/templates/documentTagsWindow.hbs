@@ -1,0 +1,18 @@
+{{log this}}
+<form class="item-tags">
+    <div class="tag-container">
+        {{#if documentTags}}
+            {{#each documentTags}}
+            <div class="tag" draggable="true">
+                <span>
+                    {{this}}
+                </span>
+                <a style="margin-left: 5px; margin-right: 5px">
+                    <i class="fas fa-times" id="{{@index}}"></i>
+                </a>
+            </div>
+            {{/each}}
+        {{/if}}
+        <input class="tag-input" autofocus placeholder="new tag"/>
+    </div>
+</form>
