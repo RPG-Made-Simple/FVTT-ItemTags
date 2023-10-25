@@ -11,12 +11,20 @@
 .item-tags .tag-container .tag {
   margin: 1px;
   border: #585858 solid 1px;
-  padding: 3px;
+  padding: 4px;
   background-color: rgb(181, 235, 181);
   border-radius: 5pt 1pt 1pt 5pt;
   align-items: center;
   display: inline;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
+}
+.item-tags .tag-container .tag .text {
+  display: inline-block;
+  top: -5px;
+  margin: 0 5px 0 5px;
+}
+.item-tags .tag-container .tag .icon {
+  margin: 0px 4px 0 4px;
 }
 .item-tags .tag-container .tag-input {
   background-color: transparent;
@@ -24,11 +32,13 @@
   width: 120px;
   flex-grow: 1;
 }
+.item-tags .confirmation {
+  margin-top: 5pt;
+  display: flex;
+}
 .item-tags .confirmation .cancel {
-  display: inline-block;
   background-color: rgb(253, 92, 92);
 }
 .item-tags .confirmation .save {
-  display: inline-block;
   background-color: rgb(181, 235, 181);
 }/*# sourceMappingURL=documentTags.css.map */

@@ -1,5 +1,20 @@
 {
-    "warning": {
-        "duplicate": "This tag already exists."
+    "itemTags": {
+        "warning": {
+            "duplicate": "This tag already exists."
+        },
+        "confirmation": {
+            "cancel": "Cancel",
+            "save": "Save",
+            "no": "No",
+            "yes": "Yes"
+        },
+        "tag": {
+            "placeholder": "new tag (press enter to add)",
+            "deletion": {
+                "title": "Delete Tag?",
+                "description": "Do you really want to delete the \"$tag\" tag?"
+            }
+        }
     }
 }
