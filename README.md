@@ -12,7 +12,7 @@
 
 A FoundryVTT library that provides a way to insert and manage tags across all documents. This is useful for storing simple data that can help modules and macros create generic code and reuse it easily, it also allows some type of customization. The idea of tagging Items was born because I don't use English in my sessions, and relying of autodetect based on names was going to be too much for me to handle.
 
-This library was part of [OIF]() and now is standalone since I think it can be very beneficial to other developers (even myself in the future!). Feel free to use it to do anything! If you have questions, join my discord or leave a issue, I will help you asap.
+This library was part of [OIF](https://github.com/ZotyDev/objects-interactions-fx) and now is standalone since I think it can be very beneficial to other developers (even myself in the future!). Feel free to use it to do anything! If you have questions, join my discord or leave a issue, I will help you asap.
 
 ### Note for Developers (modules and macros)
 Take a look at the [Documentation](https://modules.zoty.dev/itemTags/introduction.html).
