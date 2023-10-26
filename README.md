@@ -15,7 +15,7 @@ A FoundryVTT library that provides a way to insert and manage tags across all do
 This library was part of [OIF]() and now is standalone since I think it can be very beneficial to other developers (even myself in the future!). Feel free to use it to do anything! If you have questions, join my discord or leave a issue, I will help you asap.
 
 ### Note for Developers (modules and macros)
-Take a look at the [Wiki]().
+Take a look at the [Documentation](https://modules.zoty.dev/itemTags/introduction.html).
 
 Like my module? Consider supporting me :)
 
@@ -23,7 +23,8 @@ Like my module? Consider supporting me :)
 
 ---
 ## Main Features
-- Insert _Item Tags_ in any type of document
+- Insert `Tags` in almost all types of document
+- Interact with the `Tags` using the [API]()
 
 ---
 <h2 align="center"> <a href="https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md"> Changelog</a> </h2>
