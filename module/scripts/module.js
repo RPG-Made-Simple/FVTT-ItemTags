@@ -1,3 +1,16 @@
+////////////////////////////////////////////////////////////////////////////////
+//                 _____ _              _______                               //
+//                 |_   _| |            |__   __|                             //
+//                   | | | |_ ___ _ __ ___ | | __ _  __ _ ___                 //
+//                   | | | __/ _ \ '_ ` _ \| |/ _` |/ _` / __|                //
+//                  _| |_| ||  __/ | | | | | | (_| | (_| \__ \                //
+//                 |_____|\__\___|_| |_| |_|_|\__,_|\__, |___/ LIBRARY        //
+//                                                   __/ |       By ZotyDev   //
+////////////////////////////////////////////////////|___////////////////////////
+// ? Main class of the library. ItemTags provides users with a easy way to tag
+// ? documents, which makes possible to macro/module developers to make generic
+// ? code that can select the outcomes based on the tags. This way you don't
+// ? need to rely on auto recognition based on names.
 import { DocumentTagsWindow } from "./documentTagsWindow.js";
 import { TagHandler } from "./tagHandler.js";
 
@@ -10,25 +23,64 @@ Hooks.on('init', () => {
         padding:15pt;
     `);
 
-    Hooks.on("getItemSheetHeaderButtons", async (itemSheet, buttonArray) => {
+    // Attach the 'Tags' button to the item sheets
+    Hooks.on("getItemSheetHeaderButtons", (sheet, buttonArray) => {
+        console.log(sheet.object);
+        // Defines the button
         let tagButton = {
-            label: "Tags",
-            class: "item-tags",
-            icon: "fas fa-tags",
-            onclick: async () => {
+            label: 'Tags',
+            class: 'item-tags',
+            icon: 'fas fa-tags',
+            onclick: () => {
                 new DocumentTagsWindow().render(true, {
-                    document: itemSheet.object,
-                    tags: TagHandler.GetTags(itemSheet.object).slice(),
+                    document: sheet.object,
+                    // We need a copy of the tags to be used as temporary storage
+                    // for changes, that way the user can decide if they want to
+                    // save or discard the changes
+                    tags: TagHandler.GetTags(sheet.object).slice(),
                     width: 480
-                });
+                })
             }
         }
 
+        // Add the button to the button array
         buttonArray.unshift(tagButton);
     });
+
+    // Attach the 'Tags' button to the actor sheet
+    Hooks.on("getActorSheetHeaderButtons", (sheet, buttonArray) => {
+        // Defines the button
+        let tagButton = {
+            label: 'Tags',
+            class: 'item-tags',
+            icon: 'fas fa-tags',
+            onclick: () => {
+                new DocumentTagsWindow().render(true, {
+                    document: sheet.object,
+                    // We need a copy of the tags to be used as temporary storage
+                    // for changes, that way the user can decide if they want to
+                    // save or discard the changes
+                    tags: TagHandler.GetTags(sheet.object).slice(),
+                    width: 480,
+                })
+            }
+        }
+
+        // Add the button to the button array
+        buttonArray.unshift(tagButton);
+    })
+
+    // Setup the API
+    window['ItemTags'] = {
+        Get: TagHandler.GetTags,
+        Check: TagHandler.CheckTags,
+        Set: TagHandler.SetTags,
+        Add: TagHandler.AddTags,
+        Remove: TagHandler.RemoveTags,
+        Clear: TagHandler.DeleteTags,
+    }
 
     Hooks.on("ready", async () => {
         console.log("Item Tags is ready!!");
     });
-
 });

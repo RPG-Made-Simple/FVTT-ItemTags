@@ -24,7 +24,29 @@ Like my module? Consider supporting me :)
 ---
 ## Main Features
 - Insert `Tags` in almost all types of document
-- Interact with the `Tags` using the [API]()
+- Interact with the `Tags` using the [API](https://modules.zoty.dev/itemTags/apiReference.html)
 
----
-<h2 align="center"> <a href="https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md"> Changelog</a> </h2>
+## API Example
+```js
+if (ItemTags.Check(game.items.get("<id>"), ['metal'])) {
+    console.log('The tag is set');
+} else {
+    console.log('The tag is not set');
+}
+```
+
+## Adding Tags
+Open a supported document and find the `Tags` button, click it and insert the tag. All the changes you do need to be confirmed, if you click on cancel the changes you mader will be discarded.
+
+<p align="center">
+    <img src="https://modules.zoty.dev/resources/itemTags/adding-tags.gif" alt="Adding Tags">
+</p>
+
+## Removing Tags
+Open the `Tags` button and click on the `X` on the tag you want to remove. You need to confirm when removing tags.
+
+<p align="center">
+    <img src="https://modules.zoty.dev/resources/itemTags/removing-tags.gif" alt="Removing Tags">
+</p>
+
+<h2 align="center"> <a href="https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md"> Changelog</a></h2>
