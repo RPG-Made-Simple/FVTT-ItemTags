@@ -1,10 +1,10 @@
 # Item Tags Changelog
 
-### Version 1.0.1
+## Version 1.0.1
 
 - *Fixed* - OIF tag migration was not being saved.
 
-### Version 1.0.0
+## Version 1.0.0
 _These changes are relative to [OIF](https://github.com/ZotyDev/objects-interactions-fx) since this module was originally part of it_
 
 - *Fixed* - Empty flags are no more inserted into documents.
