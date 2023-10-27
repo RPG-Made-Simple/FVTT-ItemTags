@@ -63,11 +63,16 @@ export class TagHandler {
     // TODO: remove at a future version
     ////////////////////////////////////////////////////////////////////////////
     static _Migrate(document) {
-        let tags = document.getFlag('objects-interactions-fx', 'item-tags');
-        if (tags != null && tags != undefined) {
-            TagHandler.SetTags(document, tags);
-            document.unsetFlag('objects-interactions-fx', 'item-tags');
-            return tags;
+        // Check if OIF is present
+        if (game.modules.get('objects-interactions-fx') != undefined) {
+            let tags = document.getFlag('objects-interactions-fx', 'item-tags');
+            if (tags != null && tags != undefined) {
+                TagHandler.SetTags(document, tags);
+                document.unsetFlag('objects-interactions-fx', 'item-tags');
+                return tags;
+            } else {
+                return [];
+            }
         } else {
             return [];
         }

@@ -1,5 +1,9 @@
 # Item Tags Changelog
 
+## Version 1.0.2
+
+- *Fixed #1* - Fixed a bug where `_Migrate()` tried to access data that could be invalid.
+
 ## Version 1.0.1
 
 - *Fixed* - OIF tag migration was not being saved.
