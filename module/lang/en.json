@@ -15,6 +15,10 @@
                 "title": "Delete Tag?",
                 "description": "Do you really want to delete the \"$tag\" tag?"
             }
+        },
+        "window": {
+            "itemTags": "Item Tags",
+            "hiddenTags": "Hidden Tags"
         }
     }
 }

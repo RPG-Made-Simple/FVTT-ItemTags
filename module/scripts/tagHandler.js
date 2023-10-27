@@ -182,4 +182,71 @@ export class TagHandler {
     static DeleteTags(document) {
         document.unsetFlag(C.ID, C.FLAGS.TAGS);
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Search all possibilities to find the tags
+    ////////////////////////////////////////////////////////////////////////////
+    static Search(tags) {
+        // Result that will be returned
+        let result = {
+            actors: [],
+            items: [],
+        }
+
+        // Get the tokens from the current scene
+        let currentSceneTokens = Array.from(game.scenes.current.tokens);
+        // Remove the linked tokens
+        let filteredCurrentSceneTokens = [];
+        currentSceneTokens.forEach(element => {
+            if (!element.actorLink) {
+                filteredCurrentSceneTokens.push(element);
+            }
+        });
+        // Get the actors for the current scene
+        let currentSceneActors = [];
+        filteredCurrentSceneTokens.forEach(element => {
+            currentSceneActors.push(element.actor);
+        });
+        // Combine all the actors together
+        let allActors = [...game.actors, ...currentSceneActors];
+        // Filter the actors to just include the ones that have the tags
+        allActors.forEach(element => {
+            if (TagHandler.CheckTags(element, tags)) {
+                result.actors.push(element);
+            }
+        });
+
+        // Get all owned items
+        let allOwnedItems = [];
+        allActors.forEach(element => {
+            allOwnedItems = [...allOwnedItems, ...Array.from(element.items)];
+        });
+        // Combine all the items together
+        let allItems = [...game.items, ...allOwnedItems];
+        // Filter items to just include the ones that have the tags
+        allItems.forEach(element => {
+            if (TagHandler.CheckTags(element, tags)) {
+                result.items.push(element);
+            }
+        })
+
+        // Remove empty entries
+        let noneFound = true;
+        if (result.actors.length == 0) {
+            result.actors = undefined;
+        } else {
+            noneFound = false;
+        }
+        if (result.items.length == 0) {
+            result.items = undefined;
+        } else {
+            noneFound = false;
+        }
+
+        if (noneFound) {
+            result["noneFound"] = true;
+        }
+
+        return { result };
+    }
 }

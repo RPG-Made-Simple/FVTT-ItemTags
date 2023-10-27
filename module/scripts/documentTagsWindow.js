@@ -21,7 +21,7 @@ export class DocumentTagsWindow extends FormApplication {
             id: 'document-tags',
             submitOnChange: true,
             template: `modules/${C.ID}/module/templates/documentTagsWindow.hbs`,
-            title: "Tags",
+            title: game.i18n.localize('itemTags.window.itemTags'),
             document: '',
             tags: '',
         }

@@ -1,5 +1,11 @@
 # Item Tags Changelog
 
+## Version 1.0.3
+
+- *Feature* - Now only GMs see the `Item Tags` button.
+- *Feature* - Added a `Search()` method to return all the Objects that pass the filter, read more about it [here]().
+- *Interface* - Modified the header name from `Tags` to `Item Tags`
+
 ## Version 1.0.2
 
 - *Fixed #1* - Fixed a bug where `_Migrate()` tried to access data that could be invalid.
