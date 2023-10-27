@@ -1,11 +1,15 @@
 # Item Tags Changelog
 
+### Version 1.0.1
+
+- *Fixed* - OIF tag migration was not being saved.
+
 ### Version 1.0.0
 _These changes are relative to [OIF](https://github.com/ZotyDev/objects-interactions-fx) since this module was originally part of it_
 
-- *Fix* - Empty flags are no more inserted into documents.
-- *Fix* - It is now impossible to create duplicate tags, note that Item Tags is case sensitive, so `Dagger` and `dagger` are different tags.
-- *Fix* - All tags are now stored as `String`.
+- *Fixed* - Empty flags are no more inserted into documents.
+- *Fixed* - It is now impossible to create duplicate tags, note that Item Tags is case sensitive, so `Dagger` and `dagger` are different tags.
+- *Fixed* - All tags are now stored as `String`.
 - *Feature* - All the tags that were defined by OIF will be migrated and deleted.
 - *Feature* - Added a API to interact with the tags of a document.
 - *Feature* - Deleting tags now require a confirmation.

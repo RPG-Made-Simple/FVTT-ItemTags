@@ -65,6 +65,7 @@ export class TagHandler {
     static _Migrate(document) {
         let tags = document.getFlag('objects-interactions-fx', 'item-tags');
         if (tags != null && tags != undefined) {
+            TagHandler.SetTags(document, tags);
             document.unsetFlag('objects-interactions-fx', 'item-tags');
             return tags;
         } else {

@@ -2,7 +2,7 @@
     "id": "item-tags",
     "title": "🏷️ Item Tags (Library)",
     "description": "Library that lets you insert tags into documents.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "library": true,
     "authors": [
         {
