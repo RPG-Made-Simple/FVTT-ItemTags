@@ -28,7 +28,6 @@ Hooks.on('init', () => {
         if (game.user.isGM) {
             // Attach the 'Item Tags' button to the item sheets
             Hooks.on("getItemSheetHeaderButtons", (sheet, buttonArray) => {
-                console.log(sheet.object);
                 // Defines the button
                 let tagButton = {
                     label: game.i18n.localize('itemTags.window.itemTags'),
@@ -83,6 +82,8 @@ Hooks.on('init', () => {
             Remove: TagHandler.RemoveTags,
             Clear: TagHandler.DeleteTags,
             Search: TagHandler.Search,
+            SearchAll: TagHandler.SearchAll,
+            SearchActor: TagHandler.SearchActor,
         }
 
         console.log("Item Tags is ready!!");

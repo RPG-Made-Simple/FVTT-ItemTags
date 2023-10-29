@@ -1,9 +1,15 @@
 # Item Tags Changelog
 
+## Version 1.1.0
+
+- *API* - `Search()` is now deprecated, use [`SearchAll()`](https://modules.zoty.dev/itemTags/apiReference.html#search-all) instead.
+- *Feature* - Better searching method, `SearchAll()`, that will search across all your world and filter the results, read more about it [here](https://modules.zoty.dev/itemTags/apiReference.html#search-all).
+- *Feature* - New search method, `SearchActor()`, to search inside actors, read more about it [here](https://modules.zoty.dev/itemTags/apiReference.html#search-actor).
+
 ## Version 1.0.3
 
 - *Feature* - Now only GMs see the `Item Tags` button.
-- *Feature* - Added a `Search()` method to return all the Objects that pass the filter, read more about it [here]().
+- *Feature* - Added a `Search()` method to return all the Objects that pass the filter, read more about it [here](https://modules.zoty.dev/itemTags/apiReference.html#search-tags).
 - *Interface* - Modified the header name from `Tags` to `Item Tags`
 
 ## Version 1.0.2
