@@ -151,7 +151,7 @@ export class TagHandler {
 
     ////////////////////////////////////////////////////////////////////////////
     // Checks a document's tags based on the passed tags using a method, the
-    // method defaults to 'include'
+    // method defaults to 'includeAND'
     ////////////////////////////////////////////////////////////////////////////
     static CheckTags(document, tags, method) {
         // Validate the tags
@@ -227,7 +227,7 @@ export class TagHandler {
 
     ////////////////////////////////////////////////////////////////////////////
     // Checks a document's tags based on the passed string, the method defaults
-    // to 'include'
+    // to 'includeAND'
     ////////////////////////////////////////////////////////////////////////////
     static CheckTagsString(document, string, method) {
         // Check the method

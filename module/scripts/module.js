@@ -77,6 +77,7 @@ Hooks.on('init', () => {
         window['ItemTags'] = {
             Get: TagHandler.GetTags,
             Check: TagHandler.CheckTags,
+            CheckString: TagHandler.CheckTagsString,
             Set: TagHandler.SetTags,
             Add: TagHandler.AddTags,
             Remove: TagHandler.RemoveTags,

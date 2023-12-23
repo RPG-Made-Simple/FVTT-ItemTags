@@ -1,5 +1,9 @@
 # Item Tags Changelog
 
+## Version 1.1.1
+
+- *API* - Exposed the [`CheckString()`](https://modules.zoty.dev/itemTags/apiReference.html#check-tags-by-string) method.
+
 ## Version 1.1.0
 
 - *API* - `Search()` is now deprecated, use [`SearchAll()`](https://modules.zoty.dev/itemTags/apiReference.html#search-all) instead.
