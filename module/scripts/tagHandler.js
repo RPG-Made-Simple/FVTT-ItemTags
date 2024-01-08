@@ -9,6 +9,7 @@
 ////////////////////////////////////////////////////|___////////////////////////
 // ? This class provides the interactions with the tags.
 import { Constants as C } from "./constants.js";
+import { GlobalTags } from "./globalTags.js";
 
 export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
@@ -101,10 +102,18 @@ export class TagHandler {
 
         // Check to see if the new tags are empty
         if (tags.length == 0) {
+            // Global tags helper
+            // Is called before deleting the tags because we want to use the
+            // previous tags of a document inside the helper
+            GlobalTags._OnEdit(document, tags);
             // Delete all the tags
             TagHandler.DeleteTags(document);
         }
         else {
+            // Global tags helper
+            // Is called before setting the tags because we want to use the
+            // previous tags of a document inside the helper
+            GlobalTags._OnEdit(document, tags);
             // Set the new tags
             document.setFlag(C.ID, C.FLAGS.TAGS, tags);
         }
@@ -126,6 +135,10 @@ export class TagHandler {
             let newTags = [...currentTags, ...tags];
             // Remove duplicates
             newTags = [...new Set(newTags)];
+            // Global tags helper
+            // Is called before addomg the tags because we want to use the
+            // previous tags of a document inside the helper
+            GlobalTags._OnEdit(document, newTags);
             // Set the new array
             TagHandler.SetTags(document, newTags);
         }
@@ -144,6 +157,10 @@ export class TagHandler {
             let currentTags = TagHandler.GetTags(document);
             // Filter the current tags removing the ones passed
             let newTags = currentTags.filter(element => !tags.includes(element));
+            // Global tags helper
+            // Is called before removing the tags because we want to use the
+            // previous tags of a document inside the helper
+            GlobalTags._OnEdit(document, newTags);
             // Set the new array
             TagHandler.SetTags(document, newTags);
         }
@@ -226,6 +243,21 @@ export class TagHandler {
     }
 
     ////////////////////////////////////////////////////////////////////////////
+    // Checks a document's tags and returns the missing ones
+    ////////////////////////////////////////////////////////////////////////////
+    static CheckTagsMissing(document, tags) {
+        // Validate the tags
+        tags = TagHandler._Validate(tags);
+
+        // Get the current tags
+        let currentTags = TagHandler.GetTags(document);
+        // Returns the difference between currentTags and tags
+        let missingTags = currentTags.filter(x => !tags.includes(x));
+
+        return missingTags;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     // Checks a document's tags based on the passed string, the method defaults
     // to 'includeAND'
     ////////////////////////////////////////////////////////////////////////////
@@ -295,6 +327,10 @@ export class TagHandler {
     // Delete the tags of a document
     ////////////////////////////////////////////////////////////////////////////
     static DeleteTags(document) {
+        // Global tags helper
+        // Is called before removing the tags because we want to use the
+        // previous tags of a document inside the helper
+        GlobalTags._OnEdit(document, []);
         document.unsetFlag(C.ID, C.FLAGS.TAGS);
     }
 

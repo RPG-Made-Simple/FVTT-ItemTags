@@ -1,0 +1,26 @@
+{{log this}}
+<form class="item-tags">
+    <div class="tag-container">
+        {{#if tags}}
+            {{#each tags}}
+            <div class="tag">
+                <span class="text">
+                    {{this}}
+                </span>
+                <a class="icon">
+                    <i class="fas fa-times" id="{{@index}}"></i>
+                </a>
+            </div>
+            {{/each}}
+        {{/if}}
+        <input class="tag-input" autofocus placeholder="{{localize "itemTags.tag.placeholder"}}"/>
+    </div>
+    <span class="confirmation">
+        <button type="button" class="cancel">
+            <i class="fas fa-times"></i>{{localize "itemTags.confirmation.cancel"}}
+        </button>
+        <button type="button" class="save">
+            <i class="fas fa-check"></i>{{localize "itemTags.confirmation.save"}}
+        </button>
+    </span>
+</form>

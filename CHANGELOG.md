@@ -1,5 +1,11 @@
 # Item Tags Changelog
 
+## Version 2.0.0
+
+- *API* - Exposed the [`Missing()`]() method.
+- *API* - Exposed the [`DeleteAll()`]() method.
+- *Internal* - Made it possible to bind data to a specific world.
+
 ## Version 1.1.1
 
 - *API* - Exposed the [`CheckString()`](https://modules.zoty.dev/itemTags/apiReference.html#check-tags-by-string) method.
@@ -37,6 +43,6 @@ _These changes are relative to [OIF](https://github.com/ZotyDev/objects-interact
 - *Interface* - Improved tag visuals to be more readable and look better in general.
 - *Interface* - Improved placeholder text for adding a new tag.
 - *Languages* - Made all strings translatable.
--  *Internal* - Remove some unused code.
--  *Internal* - Changed CSS to SASS for a easier and cleaner development.
--  *Internal* - Changed the flag id where tags get stored, from `objects-interactions-fx` to `item-tags`, and the flag, from `item-tags` to `tags`.
+- *Internal* - Remove some unused code.
+- *Internal* - Changed CSS to SASS for a easier and cleaner development.
+- *Internal* - Changed the flag id where tags get stored, from `objects-interactions-fx` to `item-tags`, and the flag, from `item-tags` to `tags`.

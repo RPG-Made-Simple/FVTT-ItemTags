@@ -18,7 +18,10 @@
         },
         "window": {
             "itemTags": "Item Tags",
-            "hiddenTags": "Hidden Tags"
+            "globalTags": "Global Tags"
+        },
+        "tooltips": {
+            "globalTags": "Global Tags"
         }
     }
 }
