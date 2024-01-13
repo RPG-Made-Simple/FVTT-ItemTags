@@ -8,7 +8,7 @@
 //                                                   __/ |       By ZotyDev   //
 ////////////////////////////////////////////////////|___////////////////////////
 // ? Here are all the constants used by ItemTags, all static values are and
-// ? should be here
+// ? must be here
 export class Constants {
     static ID = 'item-tags';
     static NAME_FLAT = 'Item Tags';

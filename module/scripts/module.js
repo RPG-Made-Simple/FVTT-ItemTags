@@ -148,14 +148,14 @@ Hooks.once('init', () => {
         }
 
         Hooks.call('item-tags.ready');
-        C.D.info('Ready!');
+        C.D.info('Ready!!');
     });
 
     // Debug info
     Hooks.once('debugger.ready', () => {
-        C.D = new Debugger(C.ID, '🏷️ ItemTags', false, true);
+        C.D = new Debugger(C.ID, C.NAME, true, true);
         C.D.info('Module Information:');
-        C.D.info(`Version ${game.modules.get('item-tags').version}`);
+        C.D.info(`Version ${game.modules.get(C.ID).version}`);
         C.D.info('Library By ZotyDev');
     });
 });
