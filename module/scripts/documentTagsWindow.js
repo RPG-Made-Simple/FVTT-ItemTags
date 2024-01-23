@@ -13,7 +13,7 @@ import { TagHandler } from "./tagHandler.js";
 
 export class DocumentTagsWindow extends FormApplication {
     static get defaultOptions() {
-        const defaults = super.defaultOptions;
+        const defaultOptions = super.defaultOptions;
 
         const overrides = {
             closeOnSubmit: false,
@@ -24,9 +24,12 @@ export class DocumentTagsWindow extends FormApplication {
             title: game.i18n.localize('itemTags.window.itemTags'),
             document: '',
             tags: '',
+            tagBeingEdited: '',
         }
 
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        defaultOptions.classes = ['item-tags-window', 'window-content']
+
+        const mergedOptions = foundry.utils.mergeObject(defaultOptions, overrides);
 
         return mergedOptions;
     }
@@ -37,6 +40,9 @@ export class DocumentTagsWindow extends FormApplication {
     async _handleEnterKeypress(html, event) {
         // Check the pressed key to see if it is enter
         if (event.key == "Enter") {
+            // Check the ordering of tags
+            this.solveOrder(html);
+
             // Get the current temporary tags from the passed options
             let currentTags = this.options.tags;
 
@@ -53,10 +59,11 @@ export class DocumentTagsWindow extends FormApplication {
                 // Resets the value inside the input field
                 event.target.value = "";
 
-                // Render the window again to show changes and focus on the
-                // input field
+                // Reset the current tag being edited
+                this.options.tagBeingEdited = '';
+
+                // Render the window again to show changes
                 this.render();
-                html[0].querySelector('input[class="tag-input"]')?.focus();
             }
         }
     }
@@ -66,10 +73,10 @@ export class DocumentTagsWindow extends FormApplication {
     ////////////////////////////////////////////////////////////////////////////
     async _handleDeleteClick(html, event) {
         // Get clicked element
-        let clickedElement = $(event.currentTarget);
+        const clickedElement = $(event.currentTarget);
 
         // Dialog to ask if the user wants to delete the tag
-        let dialog = new Dialog({
+        const dialog = new Dialog({
             title: game.i18n.localize('itemTags.tag.deletion.title'),
             content: `<p>${game.i18n.localize('itemTags.tag.deletion.description').replace('$tag', clickedElement[0].parentElement.parentElement.childNodes[1].innerText)}</p>`,
             buttons: {
@@ -86,7 +93,7 @@ export class DocumentTagsWindow extends FormApplication {
                         // Get the current temporary tags
                         let currentTags = this.options.tags;
                         // Remove the tag using the id of its position
-                        currentTags.splice(clickedElement[0].id, 1);
+                        currentTags.splice(event.target.dataset.index, 1);
 
                         // Render the window again to show changes
                         this.render();
@@ -95,6 +102,23 @@ export class DocumentTagsWindow extends FormApplication {
             }
         });
         dialog.render(true);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Handle double click to edit
+    ////////////////////////////////////////////////////////////////////////////
+    async _handleDoubleClickEdit(html, event) {
+        // Get clicked element
+        const clickedElement = $(event.currentTarget);
+
+        // Get the current temporary tags
+        let currentTags = this.options.tags;
+        const tag = clickedElement[0].outerText;
+        currentTags.splice(currentTags.indexOf(tag), 1)
+
+        this.options.tagBeingEdited = tag;
+
+        this.render();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -108,11 +132,44 @@ export class DocumentTagsWindow extends FormApplication {
     ////////////////////////////////////////////////////////////////////////////
     // Handle clicking on save
     ////////////////////////////////////////////////////////////////////////////
-    async _handleSave() {
+    async _handleSave(html, event) {
+        const tagBeingEdited = html[0].querySelector('input[class="tag-input"]').value;
+
+        // Check ordering of tags
+        this.solveOrder(html);
+
+        // Add the current tag being edited, just in case
+        if (tagBeingEdited.length > 0) {
+            this.options.tags.push(tagBeingEdited);
+        }
+
         // Saves the current temporary tags
-        TagHandler.SetTags(this.options.document, this.options.tags);
+        TagHandler.setTags(this.options.document, this.options.tags);
         // Closes the window
         this.close();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Check and solves ordering of tags
+    ////////////////////////////////////////////////////////////////////////////
+    solveOrder(html) {
+        const rawTags = html[0].children[0].children;
+        let tags = new Array();
+        for (let i = 0; i < rawTags.length - 1; i++) {
+            tags.push(rawTags[i].outerText);
+        }
+
+        // Sanitizes the strings
+        let orderedTags = new Array();
+        for (const tag of tags) {
+            orderedTags.push(tag.trim());
+        }
+
+        // Check if the tags only differ in ordering
+        if (this.options.tags.toSorted().toString() === orderedTags.toSorted().toString()) {
+            // Set the tags as the new ordered ones
+            this.options.tags = orderedTags;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -125,9 +182,12 @@ export class DocumentTagsWindow extends FormApplication {
         html.on('click', 'i[class="fas fa-times"]', this._handleDeleteClick.bind(this, html));
 
         html.on('click', 'button[class="cancel"]', this._handleCancel.bind(this));
-        html.on('click', 'button[class="save"]', this._handleSave.bind(this));
+        html.on('click', 'button[class="save"]', this._handleSave.bind(this, html));
 
-        html[0].querySelector('input[class="tag-input"]')?.focus();
+        html.on('dblclick', 'span[class="text"]', this._handleDoubleClickEdit.bind(this, html));
+
+        html[0].querySelector('input[class="tag-input"]').focus();
+        html[0].querySelector('input[class="tag-input"]').value = this.options.tagBeingEdited;
     }
 
     ////////////////////////////////////////////////////////////////////////////

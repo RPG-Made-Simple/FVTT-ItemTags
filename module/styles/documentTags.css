@@ -22,9 +22,16 @@
   display: inline-block;
   top: -5px;
   margin: 0 5px 0 5px;
+  cursor: pointer;
+}
+.item-tags .tag-container .tag .text:hover {
+  text-decoration: underline;
 }
 .item-tags .tag-container .tag .icon {
   margin: 0px 4px 0 4px;
+}
+.item-tags .tag-container .on-drag {
+  background-color: rgb(170, 105, 212);
 }
 .item-tags .tag-container .tag-input {
   background-color: transparent;

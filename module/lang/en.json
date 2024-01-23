@@ -10,7 +10,7 @@
             "yes": "Yes"
         },
         "tag": {
-            "placeholder": "new tag (press enter to add)",
+            "placeholder": "new tag (press Enter to add)",
             "deletion": {
                 "title": "Delete Tag?",
                 "description": "Do you really want to delete the \"$tag\" tag?"

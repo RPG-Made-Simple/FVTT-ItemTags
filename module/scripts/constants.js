@@ -15,14 +15,6 @@ export class Constants {
     static NAME = `🏷️ ${Constants.NAME_FLAT}`;
     static FLAGS = {
         TAGS: 'tags',
-        HIDDEN_TAGS: 'hidden-tags',
-    }
-    static FILES = {
-        ORIGIN: 'data',
-        DATA_FOLDERS: {
-            ROOT: 'itemTags',
-            CACHE: 'itemTags/cache'
-        }
     }
     static PACKETS = {};
     static D;

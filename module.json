@@ -2,7 +2,7 @@
     "id": "item-tags",
     "title": "🏷️ Item Tags (Library)",
     "description": "Library that lets you insert tags into documents.",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "library": true,
     "authors": [
         {
@@ -22,7 +22,7 @@
         }
     ],
     "compatibility": {
-        "minimun": "10",
+        "minimum": "10",
         "verified": "11"
     },
     "license": "./LICENSE",
@@ -34,11 +34,6 @@
     "changelog": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md",
     "relationships": {
         "requires": [
-            {
-                "id": "packets",
-                "type": "module",
-                "compatibility": {}
-            },
             {
                 "id": "debugger",
                 "type": "module",

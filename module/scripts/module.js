@@ -11,143 +11,58 @@
 // ? possible to macro/module developers to make generic code that can select
 // ? the outcomes based on the tags. This way you don't need to rely on auto
 // ? recognition based on names.
-import { DocumentTagsWindow } from "./documentTagsWindow.js";
-import { GlobalTagsWindow } from "./globalTagsWindow.js";
 import { TagHandler } from "./tagHandler.js";
 import { Constants as C } from "./constants.js";
-import { GlobalTags } from "./globalTags.js";
+
+import { ItemTags } from "./itemTags.js";
+import { ItemTagsLayer } from "./itemTagsLayer.js";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Entry-point for everything
 ////////////////////////////////////////////////////////////////////////////////
 Hooks.once('init', () => {
     Hooks.once('toolbox.ready', async () => {
+        // Register the module for showcase
         Toolbox.showcaseModule(C.NAME_FLAT);
-    });
 
-    Hooks.on('getSceneControlButtons', (controls) => {
-        if (!canvas.scene) return;
+        ItemTags.initialize();
 
-        const GlobalTagsButton = {
-            name: 'global-tags',
-            title: game.i18n.localize('itemTags.tooltips.globalTags'),
-            icon: 'fas fa-tags',
-            onClick: async () => {
-                new GlobalTagsWindow().render(true, {
-                    width: 480
-                });
-            },
-            button: true
-        }
-
-        controls.push({
-            name: C.ID,
-            title: C.NAME,
-            layer: 'controls',
-            icon: 'fas fa-tags',
-            visible: game.user.isGM,
-            tools: [
-                GlobalTagsButton,
-            ]
-        });
-    })
-
-    Hooks.on('ready', async () => {
-        // Create the folders that are going to be used
-        Toolbox
-        if (game.user.isGM)
-        {
-            // Create the root folder if it doesn't exist
-            let Folders = await FilePicker.browse(C.FILES.ORIGIN, '.');
-            if (!Folders.dirs.includes(C.FILES.DATA_FOLDERS.ROOT))
-            {
-                console.warn("Root folder doesn't exist, creating it...");
-                await FilePicker.createDirectory(C.FILES.ORIGIN, C.FILES.DATA_FOLDERS.ROOT);
-            }
-
-            // Create the cache folder if it doesn't exist
-            Folders = await FilePicker.browse(C.FILES.ORIGIN, C.FILES.DATA_FOLDERS.ROOT);
-            if (!Folders.dirs.includes(C.FILES.DATA_FOLDERS.CACHE))
-            {
-                console.warn("Cache folder doesn't exist, creating it...");
-                await FilePicker.createDirectory(C.FILES.ORIGIN, C.FILES.DATA_FOLDERS.CACHE);
-            }
-        }
-
-        // Load current world data
-        // TODO replicate the data to the clients
-        if (game.user.isGM) {
-            GlobalTags._LoadData();
-        }
-
-        // Only GMs should see the Tags
-        if (game.user.isGM) {
-            // Attach the 'Item Tags' button to the item sheets
-            Hooks.on("getItemSheetHeaderButtons", (sheet, buttonArray) => {
-                // Defines the button
-                let tagButton = {
-                    label: game.i18n.localize('itemTags.window.itemTags'),
-                    class: 'item-tags',
-                    icon: 'fas fa-tags',
-                    onclick: () => {
-                        new DocumentTagsWindow().render(true, {
-                            document: sheet.object,
-                            // We need a copy of the tags to be used as temporary storage
-                            // for changes, that way the user can decide if they want to
-                            // save or discard the changes
-                            tags: TagHandler.GetTags(sheet.object).slice(),
-                            width: 480
-                        })
-                    }
-                }
-
-                // Add the button to the button array
-                buttonArray.unshift(tagButton);
-            });
-
-            // Attach the 'Item Tags' button to the actor sheet
-            Hooks.on("getActorSheetHeaderButtons", (sheet, buttonArray) => {
-                // Defines the button
-                let tagButton = {
-                    label: game.i18n.localize('itemTags.window.itemTags'),
-                    class: 'item-tags',
-                    icon: 'fas fa-tags',
-                    onclick: () => {
-                        new DocumentTagsWindow().render(true, {
-                            document: sheet.object,
-                            // We need a copy of the tags to be used as temporary storage
-                            // for changes, that way the user can decide if they want to
-                            // save or discard the changes
-                            tags: TagHandler.GetTags(sheet.object).slice(),
-                            width: 480,
-                        })
-                    }
-                }
-
-                // Add the button to the button array
-                buttonArray.unshift(tagButton);
-            })
-        }
-
-        // Setup the API
+        // Setup the API and methods
         window['ItemTags'] = {
-            Get: TagHandler.GetTags,
-            Check: TagHandler.CheckTags,
-            CheckString: TagHandler.CheckTagsString,
-            Set: TagHandler.SetTags,
-            Add: TagHandler.AddTags,
-            Remove: TagHandler.RemoveTags,
-            Clear: TagHandler.DeleteTags,
-            Search: TagHandler.Search,
-            SearchAll: TagHandler.SearchAll,
-            SearchActor: TagHandler.SearchActor,
-            DeleteAll: TagHandler.DeleteTags,
-            Missing: TagHandler.CheckTagsMissing,
+            // Deprecated naming
+            Get: TagHandler.getTags,
+            Check: TagHandler.checkTags,
+            CheckString: TagHandler.checkTagsString,
+            Set: TagHandler.setTags,
+            Add: TagHandler.addTags,
+            Remove: TagHandler.removeTags,
+            Clear: TagHandler.deleteTags,
+            SearchAll: TagHandler.searchAll,
+            SearchActor: TagHandler.searchActor,
+            DeleteAll: TagHandler.deleteTags,
+            Missing: TagHandler.checkTagsMissing,
+
+            // New naming
+            get: TagHandler.getTags,
+            check: TagHandler.checkTags,
+            checkString: TagHandler.checkTagsString,
+            set: TagHandler.setTags,
+            add: TagHandler.addTags,
+            remove: TagHandler.removeTags,
+            clear: TagHandler.deleteTags,
+            searchAll: TagHandler.searchAll,
+            searchActor: TagHandler.searchActor,
+            deleteAll: TagHandler.deleteTags,
+            missing: TagHandler.checkTagsMissing,
+
 
             GlobalTags: GlobalTags,
         }
 
+        // Informs that ItemTags is ready to be used
         Hooks.call('item-tags.ready');
+
+        // Debug
         C.D.info('Ready!!');
     });
 
@@ -158,4 +73,11 @@ Hooks.once('init', () => {
         C.D.info(`Version ${game.modules.get(C.ID).version}`);
         C.D.info('Library By ZotyDev');
     });
+
+    // Setup the layer where the interface will be
+    CONFIG.Canvas.layers['itemTags'] = {
+        group: 'interface',
+        layerClass: ItemTagsLayer,
+    }
 });
+

@@ -9,21 +9,18 @@
 ////////////////////////////////////////////////////|___////////////////////////
 // ? This class provides the interactions with the tags.
 import { Constants as C } from "./constants.js";
-import { GlobalTags } from "./globalTags.js";
 
 export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Checks to see if the document has tags
     ////////////////////////////////////////////////////////////////////////////
-    static _Check(document) {
+    static #check(document) {
         let tags = document.getFlag(C.ID, C.FLAGS.TAGS);
-        if (tags == null || tags == undefined)
-        {
+        if (tags == null || tags == undefined) {
             // Document has no tags
             return { valid: false, tags: tags };
         }
-        else
-        {
+        else {
             // Document has tags
             return { valid: true, tags: tags };
         }
@@ -32,15 +29,13 @@ export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Validates the tags and return only valid tags
     ////////////////////////////////////////////////////////////////////////////
-    static _Validate(tags) {
+    static #validate(tags) {
         // Check if the data is valid
         if (tags != null && tags != undefined) {
             // Check if the tags are contained inside a array
-            if (Array.isArray(tags))
-            {
+            if (Array.isArray(tags)) {
                 // Check if the array is not empty
-                if (tags.length != 0)
-                {
+                if (tags.length != 0) {
                     // Convert all tags to strings
                     let convertedTags = [];
                     tags.forEach(element => {
@@ -60,60 +55,31 @@ export class TagHandler {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // Migrate tags from OIF
-    // TODO: remove at a future version
-    ////////////////////////////////////////////////////////////////////////////
-    static _Migrate(document) {
-        // Check if OIF is present
-        if (game.modules.get('objects-interactions-fx') != undefined) {
-            let tags = document.getFlag('objects-interactions-fx', 'item-tags');
-            if (tags != null && tags != undefined) {
-                TagHandler.SetTags(document, tags);
-                document.unsetFlag('objects-interactions-fx', 'item-tags');
-                return tags;
-            } else {
-                return [];
-            }
-        } else {
-            return [];
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
     // Return the tags of a document
     ////////////////////////////////////////////////////////////////////////////
-    static GetTags(document) {
-        let check = TagHandler._Check(document);
+    static getTags(document) {
+        let check = TagHandler.#check(document);
         if (check.valid) {
             return check.tags;
         }
         else {
-            // Try migration
-            return TagHandler._Migrate(document);
+            return [];
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////
     // Set the tags of a document
     ////////////////////////////////////////////////////////////////////////////
-    static SetTags(document, tags) {
+    static setTags(document, tags) {
         // Validate the tags
-        tags = TagHandler._Validate(tags);
+        tags = TagHandler.#validate(tags);
 
         // Check to see if the new tags are empty
         if (tags.length == 0) {
-            // Global tags helper
-            // Is called before deleting the tags because we want to use the
-            // previous tags of a document inside the helper
-            GlobalTags._OnEdit(document, tags);
             // Delete all the tags
-            TagHandler.DeleteTags(document);
+            TagHandler.deleteTags(document);
         }
         else {
-            // Global tags helper
-            // Is called before setting the tags because we want to use the
-            // previous tags of a document inside the helper
-            GlobalTags._OnEdit(document, tags);
             // Set the new tags
             document.setFlag(C.ID, C.FLAGS.TAGS, tags);
         }
@@ -122,47 +88,37 @@ export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Add tags to the document
     ////////////////////////////////////////////////////////////////////////////
-    static AddTags(document, tags) {
+    static addTags(document, tags) {
         // Validate the tags
-        tags = TagHandler._Validate(tags);
+        tags = TagHandler.#validate(tags);
 
         // Check if the new tags are not empty
-        if (tags.length != 0)
-        {
+        if (tags.length != 0) {
             // Get the current tags
-            let currentTags = TagHandler.GetTags(document);
+            let currentTags = TagHandler.getTags(document);
             // Append to the current tags
             let newTags = [...currentTags, ...tags];
             // Remove duplicates
             newTags = [...new Set(newTags)];
-            // Global tags helper
-            // Is called before addomg the tags because we want to use the
-            // previous tags of a document inside the helper
-            GlobalTags._OnEdit(document, newTags);
             // Set the new array
-            TagHandler.SetTags(document, newTags);
+            TagHandler.setTags(document, newTags);
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////
     // Remove tags from the document
     ////////////////////////////////////////////////////////////////////////////
-    static RemoveTags(document, tags) {
+    static removeTags(document, tags) {
         // Validate the tags
-        tags = TagHandler._Validate(tags);
+        tags = TagHandler.#validate(tags);
 
-        if (tags.length != 0)
-        {
+        if (tags.length != 0) {
             // Get the current tags
-            let currentTags = TagHandler.GetTags(document);
+            let currentTags = TagHandler.getTags(document);
             // Filter the current tags removing the ones passed
             let newTags = currentTags.filter(element => !tags.includes(element));
-            // Global tags helper
-            // Is called before removing the tags because we want to use the
-            // previous tags of a document inside the helper
-            GlobalTags._OnEdit(document, newTags);
             // Set the new array
-            TagHandler.SetTags(document, newTags);
+            TagHandler.setTags(document, newTags);
         }
     }
 
@@ -170,19 +126,18 @@ export class TagHandler {
     // Checks a document's tags based on the passed tags using a method, the
     // method defaults to 'includeAND'
     ////////////////////////////////////////////////////////////////////////////
-    static CheckTags(document, tags, method) {
+    static checkTags(document, tags, method) {
         // Validate the tags
-        tags = TagHandler._Validate(tags);
+        tags = TagHandler.#validate(tags);
 
-        if (tags.length != 0)
-        {
+        if (tags.length != 0) {
             // Check the method
             if (method == undefined) {
                 method = 'includeAND';
             }
 
             // Get the current tags
-            let currentTags = TagHandler.GetTags(document);
+            let currentTags = TagHandler.getTags(document);
             // Checking method
             if (method == 'includeAND') {
                 // Iterates checking if each of the passed tags are set, if
@@ -245,12 +200,12 @@ export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Checks a document's tags and returns the missing ones
     ////////////////////////////////////////////////////////////////////////////
-    static CheckTagsMissing(document, tags) {
+    static checkTagsMissing(document, tags) {
         // Validate the tags
-        tags = TagHandler._Validate(tags);
+        tags = TagHandler.#validate(tags);
 
         // Get the current tags
-        let currentTags = TagHandler.GetTags(document);
+        let currentTags = TagHandler.getTags(document);
         // Returns the difference between currentTags and tags
         let missingTags = currentTags.filter(x => !tags.includes(x));
 
@@ -261,14 +216,14 @@ export class TagHandler {
     // Checks a document's tags based on the passed string, the method defaults
     // to 'includeAND'
     ////////////////////////////////////////////////////////////////////////////
-    static CheckTagsString(document, string, method) {
+    static checkTagsString(document, string, method) {
         // Check the method
         if (method == undefined) {
             method = 'includeAND';
         }
 
         // Get the current tags
-        let currentTags = TagHandler.GetTags(document);
+        let currentTags = TagHandler.getTags(document);
         // Checking method
         if (method == 'includeAND') {
             // Iterates checking if the passed string is included in the tags,
@@ -326,11 +281,7 @@ export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Delete the tags of a document
     ////////////////////////////////////////////////////////////////////////////
-    static DeleteTags(document) {
-        // Global tags helper
-        // Is called before removing the tags because we want to use the
-        // previous tags of a document inside the helper
-        GlobalTags._OnEdit(document, []);
+    static deleteTags(document) {
         document.unsetFlag(C.ID, C.FLAGS.TAGS);
     }
 
@@ -375,7 +326,7 @@ export class TagHandler {
     // Search all possibilities everywhere to find the tags using the respective
     // filters and options
     ////////////////////////////////////////////////////////////////////////////
-    static SearchAll(options) {
+    static searchAll(options) {
         ////////////////////////////////////////////////////////////////////////
         // Validation for the options
 
@@ -553,7 +504,7 @@ export class TagHandler {
         // Filter using tags
         if (options.tags != null && options.tags != undefined) {
             // Validate the tags
-            options.tags = TagHandler._Validate(options.tags);
+            options.tags = TagHandler.#validate(options.tags);
             if (options.tags.length != 0) {
                 ////////////////////////////////////////////////////////////////
                 // Actors
@@ -561,7 +512,7 @@ export class TagHandler {
                 // Global actors
                 if (options.where.actor.global) {
                     globalActors.forEach(actor => {
-                        if (TagHandler.CheckTags(actor, options.tags, options.method)) {
+                        if (TagHandler.checkTags(actor, options.tags, options.method)) {
                             finalActors.global.push(actor);
                         }
                     });
@@ -571,7 +522,7 @@ export class TagHandler {
                 // Scene actors
                 if (options.where.actor.scene) {
                     sceneActors.forEach(actor => {
-                        if (TagHandler.CheckTags(actor, options.tags, options.method)) {
+                        if (TagHandler.checkTags(actor, options.tags, options.method)) {
                             finalActors.scene.push(actor);
                         }
                     });
@@ -581,7 +532,7 @@ export class TagHandler {
                 // Player actors
                 if (options.where.actor.player) {
                     playerActors.forEach(actor => {
-                        if (TagHandler.CheckTags(actor, options.tags, options.method)) {
+                        if (TagHandler.checkTags(actor, options.tags, options.method)) {
                             finalActors.player.push(actor);
                         }
                     });
@@ -593,7 +544,7 @@ export class TagHandler {
                 // Global items
                 if (options.where.item.global) {
                     globalItems.forEach(item => {
-                        if (TagHandler.CheckTags(item, options.tags, options.method)) {
+                        if (TagHandler.checkTags(item, options.tags, options.method)) {
                             finalItems.global.push(item);
                         }
                     });
@@ -603,7 +554,7 @@ export class TagHandler {
                 // Actor items
                 if (options.where.item.actor) {
                     actorItems.forEach(item => {
-                        if (TagHandler.CheckTags(item, options.tags, options.method)) {
+                        if (TagHandler.checkTags(item, options.tags, options.method)) {
                             finalItems.actor.push(item);
                         }
                     });
@@ -613,7 +564,7 @@ export class TagHandler {
                 // Scene items
                 if (options.where.item.scene) {
                     sceneItems.forEach(item => {
-                        if (TagHandler.CheckTags(item, options.tags, options.method)) {
+                        if (TagHandler.checkTags(item, options.tags, options.method)) {
                             finalItems.scene.push(item);
                         }
                     });
@@ -623,7 +574,7 @@ export class TagHandler {
                 // Player items
                 if (options.where.item.player) {
                     playerItems.forEach(item => {
-                        if (TagHandler.CheckTags(item, options.tags, options.method)) {
+                        if (TagHandler.checkTags(item, options.tags, options.method)) {
                             finalItems.player.push(item);
                         }
                     });
@@ -643,7 +594,7 @@ export class TagHandler {
             // Global actors
             if (options.where.actor.global) {
                 globalActors.forEach(actor => {
-                    if (TagHandler.CheckTagsString(actor, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(actor, options.string, options.method)) {
                         finalActors.global.push(actor);
                     }
                 });
@@ -653,7 +604,7 @@ export class TagHandler {
             // Scene actors
             if (options.where.actor.scene) {
                 sceneActors.forEach(actor => {
-                    if (TagHandler.CheckTagsString(actor, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(actor, options.string, options.method)) {
                         finalActors.scene.push(actor);
                     }
                 });
@@ -663,7 +614,7 @@ export class TagHandler {
             // Player actors
             if (options.where.actor.player) {
                 playerActors.forEach(actor => {
-                    if (TagHandler.CheckTagsString(actor, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(actor, options.string, options.method)) {
                         finalActors.player.push(actor);
                     }
                 });
@@ -675,7 +626,7 @@ export class TagHandler {
             // Global items
             if (options.where.item.global) {
                 globalItems.forEach(item => {
-                    if (TagHandler.CheckTagsString(item, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(item, options.string, options.method)) {
                         finalItems.global.push(item);
                     }
                 });
@@ -685,7 +636,7 @@ export class TagHandler {
             // Actor items
             if (options.where.item.actor) {
                 actorItems.forEach(item => {
-                    if (TagHandler.CheckTagsString(item, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(item, options.string, options.method)) {
                         finalItems.actor.push(item);
                     }
                 });
@@ -695,7 +646,7 @@ export class TagHandler {
             // Scene items
             if (options.where.item.scene) {
                 sceneItems.forEach(item => {
-                    if (TagHandler.CheckTagsString(item, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(item, options.string, options.method)) {
                         finalItems.scene.push(item);
                     }
                 });
@@ -705,7 +656,7 @@ export class TagHandler {
             // Player items
             if (options.where.item.player) {
                 playerItems.forEach(item => {
-                    if (TagHandler.CheckTagsString(item, options.string, options.method)) {
+                    if (TagHandler.checkTagsString(item, options.string, options.method)) {
                         finalItems.player.push(item);
                     }
                 })
@@ -722,7 +673,7 @@ export class TagHandler {
             // Global actors
             if (options.where.actor.global) {
                 globalActors.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalActors.global.push(actor);
                     }
                 });
@@ -732,7 +683,7 @@ export class TagHandler {
             // Scene actors
             if (options.where.actor.scene) {
                 sceneActors.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalActors.scene.push(actor);
                     }
                 });
@@ -742,7 +693,7 @@ export class TagHandler {
             // Player actors
             if (options.where.actor.player) {
                 playerActors.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalActors.player.push(actor);
                     }
                 });
@@ -754,7 +705,7 @@ export class TagHandler {
             // Global items
             if (options.where.item.global) {
                 globalItems.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalItems.global.push(actor);
                     }
                 });
@@ -764,7 +715,7 @@ export class TagHandler {
             // Actor items
             if (options.where.item.actor) {
                 actorItems.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalItems.actor.push(actor);
                     }
                 });
@@ -774,7 +725,7 @@ export class TagHandler {
             // Scene items
             if (options.where.item.scene) {
                 sceneItems.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalItems.scene.push(actor);
                     }
                 });
@@ -784,7 +735,7 @@ export class TagHandler {
             // Player items
             if (options.where.item.player) {
                 playerItems.forEach(actor => {
-                    if (TagHandler.GetTags(actor).length != 0) {
+                    if (TagHandler.getTags(actor).length != 0) {
                         finalItems.player.push(actor);
                     }
                 });
@@ -822,7 +773,7 @@ export class TagHandler {
     ////////////////////////////////////////////////////////////////////////////
     // Search for tags inside the items of a actor
     ////////////////////////////////////////////////////////////////////////////
-    static SearchActor(actor, options) {
+    static searchActor(actor, options) {
         // Options validation
         if (options == undefined) {
             options = {
@@ -842,7 +793,7 @@ export class TagHandler {
         // Filter using tags
         if (options.tags != undefined && options.tags != null) {
             actorItems.forEach(item => {
-                if (TagHandler.CheckTags(item, options.tags, options.method)) {
+                if (TagHandler.checkTags(item, options.tags, options.method)) {
                     finalItems.push(item);
                 }
             });
@@ -850,7 +801,7 @@ export class TagHandler {
         // Filter using a string
         } else if (options.string != undefined && options.tags != null) {
             actorItems.forEach(item => {
-                if (TagHandler.CheckTagsString(item, options.string, options.method)) {
+                if (TagHandler.checkTagsString(item, options.string, options.method)) {
                     finalItems.push(item);
                 }
             })
@@ -858,7 +809,7 @@ export class TagHandler {
         // Get all the items that have atleast one tag
         } else {
             actorItems.forEach(actor => {
-                if (TagHandler.GetTags(actor).length != 0) {
+                if (TagHandler.getTags(actor).length != 0) {
                     finalItems.push(actor);
                 }
             });
@@ -870,74 +821,5 @@ export class TagHandler {
         }
 
         return finalItems;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Search all possibilities to find the tags
-    // ! DEPRECATED
-    ////////////////////////////////////////////////////////////////////////////
-    static Search(tags) {
-        console.warn("This method is deprecated, please use SearchAll")
-        // Result that will be returned
-        let result = {
-            actors: [],
-            items: [],
-        }
-
-        // Get the tokens from the current scene
-        let currentSceneTokens = Array.from(game.scenes.current.tokens);
-        // Remove the linked tokens
-        let filteredCurrentSceneTokens = [];
-        currentSceneTokens.forEach(element => {
-            if (!element.actorLink) {
-                filteredCurrentSceneTokens.push(element);
-            }
-        });
-        // Get the actors for the current scene
-        let currentSceneActors = [];
-        filteredCurrentSceneTokens.forEach(element => {
-            currentSceneActors.push(element.actor);
-        });
-        // Combine all the actors together
-        let allActors = [...game.actors, ...currentSceneActors];
-        // Filter the actors to just include the ones that have the tags
-        allActors.forEach(element => {
-            if (TagHandler.CheckTags(element, tags)) {
-                result.actors.push(element);
-            }
-        });
-
-        // Get all owned items
-        let allOwnedItems = [];
-        allActors.forEach(element => {
-            allOwnedItems = [...allOwnedItems, ...Array.from(element.items)];
-        });
-        // Combine all the items together
-        let allItems = [...game.items, ...allOwnedItems];
-        // Filter items to just include the ones that have the tags
-        allItems.forEach(element => {
-            if (TagHandler.CheckTags(element, tags)) {
-                result.items.push(element);
-            }
-        })
-
-        // Remove empty entries
-        let noneFound = true;
-        if (result.actors.length == 0) {
-            result.actors = undefined;
-        } else {
-            noneFound = false;
-        }
-        if (result.items.length == 0) {
-            result.items = undefined;
-        } else {
-            noneFound = false;
-        }
-
-        if (noneFound) {
-            result["noneFound"] = true;
-        }
-
-        return { result };
     }
 }

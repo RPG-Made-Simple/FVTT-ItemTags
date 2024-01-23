@@ -1,5 +1,6 @@
 $red-color: rgb(253, 92, 92)
 $green-color: rgb(181, 235, 181)
+$purple-color: rgb(170, 105, 212)
 
 // Item Tags
 .item-tags
@@ -27,9 +28,16 @@ $green-color: rgb(181, 235, 181)
                 display: inline-block
                 top: -5px
                 margin: 0 5px 0 5px
+                cursor: pointer
+
+                &:hover
+                    text-decoration: underline
 
             .icon
                 margin: 0px 4px 0 4px
+
+        .on-drag
+            background-color: $purple-color
 
         .tag-input
             background-color: transparent

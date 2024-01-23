@@ -2,12 +2,10 @@
     <div class="tag-container">
         {{#if documentTags}}
             {{#each documentTags}}
-            <div class="tag">
-                <span class="text">
-                    {{this}}
-                </span>
+            <div class="tag" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+                <span class="text">{{this}}</span>
                 <a class="icon">
-                    <i class="fas fa-times" id="{{@index}}"></i>
+                    <i class="fas fa-times" data-index="{{@index}}"></i>
                 </a>
             </div>
             {{/each}}
@@ -23,3 +21,55 @@
         </button>
     </span>
 </form>
+
+<script>
+    {
+        let draggedElement = undefined;
+
+        function dragEnter(event) {
+            event.preventDefault();
+
+            let target = event.target.closest('.tag');
+            if (target && draggedElement !== target) {
+                target.classList.add('on-drag');
+            }
+        }
+
+        function dragLeave(event) {
+            event.preventDefault();
+
+            let target = event.target.closest('.tag');
+            if (target && draggedElement !== target && !target.contains(event.relatedTarget)) {
+                target.classList.remove('on-drag');
+            }
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            draggedElement = event.target;
+        }
+
+        function drop(event) {
+            event.preventDefault();
+
+            const target = event.target.closest('.tag');
+
+            if (target && draggedElement !== target) {
+                const allTags = document.querySelectorAll('.tag-container .tag');
+                const draggedIndex = Array.from(allTags).indexOf(draggedElement);
+                const droppedIndex = Array.from(allTags).indexOf(target);
+
+                if (draggedIndex < droppedIndex) {
+                    target.parentNode.insertBefore(draggedElement, target.nextSibling);
+                } else {
+                    target.parentNode.insertBefore(draggedElement, target);
+                }
+
+                target.classList.remove('on-drag');
+            }
+        }
+    }
+</script>

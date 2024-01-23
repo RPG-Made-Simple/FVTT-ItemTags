@@ -1,10 +1,24 @@
 # Item Tags Changelog
 
-## Version 2.0.0
+## Version 1.2.0
 
-- *API* - Exposed the [`Missing()`]() method.
-- *API* - Exposed the [`DeleteAll()`]() method.
-- *Internal* - Made it possible to bind data to a specific world.
+- *Github* - Moved project from [ZotyDev](https://github.com/ZotyDev) to [RPG Made Simple](https://github.com/RPG-Made-Simple).
+- *CI/CD* - Updated to new workflow.
+- *Internal* - All logging and debugging now depends on [Debugger](https://foundryvtt.com/packages/debugger).
+- *Internal* - Utility methods are now provided by [Toolbox](https://foundryvtt.com/packages/toolbox).
+- *Internal* - Removed migration from OIF functionality.
+- *Internal* - Added proper `InteractionLayer` for the module.
+- *Internal* - Tag deleting now uses `data-index` instead the `id` of the tag represented by html.
+- *Internal* - Better code organization, some of the javascript standards got adopted.
+- *API* - Renamed all methods from `Example()` to `example()`, all methods that start with a uppercase are now deprecated and will be removed in the future.
+- *API* - Exposed the [`missing()`]() method.
+- *API* - Exposed the [`deleteAll()`]() method.
+- *API* - Added hooks that get called when any amount of tags is changed somewhere.
+- *Interface* - Double clicking the `Tag` text will remove the `Tag` and insert its text at the input field to be edited.
+- *Interface* - When the user clicks on `Save` the value from the input field will be added as a new `Tag`.
+- *Interface* - Added `Tag` reorder by drag and drop.
+- *Docs* - Moved docs to main repository.
+- *Docs* - Now using [docsify](https://docsify.js.org/#/) instead of [mdbook](https://rust-lang.github.io/mdBook/).
 
 ## Version 1.1.1
 
