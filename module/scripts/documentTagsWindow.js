@@ -116,6 +116,12 @@ export class DocumentTagsWindow extends FormApplication {
         const tag = clickedElement[0].outerText;
         currentTags.splice(currentTags.indexOf(tag), 1)
 
+        // If there is a already one tag being edited, add it back to prevent
+        // loss
+        if (this.options.tagBeingEdited != '') {
+            currentTags.push(this.options.tagBeingEdited);
+        }
+
         this.options.tagBeingEdited = tag;
 
         this.render();
