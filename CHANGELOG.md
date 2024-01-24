@@ -11,8 +11,8 @@
 - *Internal* - Tag deleting now uses `data-index` instead the `id` of the tag represented by html.
 - *Internal* - Better code organization, some of the javascript standards got adopted.
 - *API* - Renamed all methods from `Example()` to `example()`, all methods that start with a uppercase are now deprecated and will be removed in the future.
-- *API* - Exposed the [`missing()`]() method.
-- *API* - Exposed the [`deleteAll()`]() method.
+- *API* - Exposed the [`missing()`](https://docs.rpgmadesimple.com/FVTT-ItemTags/#/apiReference/itemTags?id=missing) method.
+- *API* - Exposed the [`deleteAll()`](https://docs.rpgmadesimple.com/FVTT-ItemTags/#/apiReference/itemTags?id=delete-all) method.
 - *API* - Added hooks that get called when any amount of tags is changed somewhere.
 - *Interface* - Double clicking the `Tag` text will remove the `Tag` and insert its text at the input field to be edited.
 - *Interface* - When the user clicks on `Save` the value from the input field will be added as a new `Tag`.

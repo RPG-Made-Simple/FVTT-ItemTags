@@ -54,9 +54,6 @@ Hooks.once('init', () => {
             searchActor: TagHandler.searchActor,
             deleteAll: TagHandler.deleteTags,
             missing: TagHandler.checkTagsMissing,
-
-
-            GlobalTags: GlobalTags,
         }
 
         // Informs that ItemTags is ready to be used

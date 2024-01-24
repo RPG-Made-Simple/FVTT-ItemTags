@@ -74,15 +74,39 @@ export class TagHandler {
         // Validate the tags
         tags = TagHandler.#validate(tags);
 
+        const preTags = TagHandler.getTags(document);
+        const addedTags = tags.filter(element => !preTags.includes(element));
+        const removedTags = preTags.filter(element => !tags.includes(element));
+
+        // Call pre hook
+        Hooks.call('item-tags.tag.pre-set', {
+            document: document,
+            currentTags: preTags,
+            addedTags: addedTags,
+            removedTags: removedTags,
+            oldTags: preTags,
+            newTags: tags,
+        });
+
         // Check to see if the new tags are empty
         if (tags.length == 0) {
             // Delete all the tags
-            TagHandler.deleteTags(document);
+            document.unsetFlag(C.ID, C.FLAGS.TAGS);
         }
         else {
             // Set the new tags
             document.setFlag(C.ID, C.FLAGS.TAGS, tags);
         }
+
+        // Call pos hook
+        Hooks.call('item-tags.tag.pos-set', {
+            document: document,
+            currentTags: tags,
+            addedTags: addedTags,
+            removedTags: removedTags,
+            oldTags: preTags,
+            newTags: tags,
+        });
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -95,11 +119,10 @@ export class TagHandler {
         // Check if the new tags are not empty
         if (tags.length != 0) {
             // Get the current tags
-            let currentTags = TagHandler.getTags(document);
+            const currentTags = TagHandler.getTags(document);
             // Append to the current tags
-            let newTags = [...currentTags, ...tags];
-            // Remove duplicates
-            newTags = [...new Set(newTags)];
+            const newTags = [...new Set([...currentTags, ...tags])];
+
             // Set the new array
             TagHandler.setTags(document, newTags);
         }
@@ -114,9 +137,10 @@ export class TagHandler {
 
         if (tags.length != 0) {
             // Get the current tags
-            let currentTags = TagHandler.getTags(document);
+            const currentTags = TagHandler.getTags(document);
             // Filter the current tags removing the ones passed
-            let newTags = currentTags.filter(element => !tags.includes(element));
+            const newTags = currentTags.filter(element => !tags.includes(element));
+
             // Set the new array
             TagHandler.setTags(document, newTags);
         }
@@ -282,7 +306,8 @@ export class TagHandler {
     // Delete the tags of a document
     ////////////////////////////////////////////////////////////////////////////
     static deleteTags(document) {
-        document.unsetFlag(C.ID, C.FLAGS.TAGS);
+        const currentTags = TagHandler.getTags(document);
+        TagHandler.removeTags(document, currentTags);
     }
 
     static _DefaultSearchOptions = {

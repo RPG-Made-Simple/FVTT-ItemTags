@@ -256,3 +256,27 @@ ItemTags.searchActor(actor, {
 This way we will search all the items of a actor and only the ones that have atleast one tag with the `light_` string inside of it will be returned.
 
 > PS: Don't do this :P Its just a example and is not a good idea to replicate, if you want to do something similar try using combination of tags, like `light` and `emit`. This way you can benefit from the individual tags if you need _idk if someone will ever get to this level of complexity, but its possible :D_
+
+## Missing
+```js
+ItemTags.missing(document: Documet, tags: Array<String>) -> Array<String>;
+```
+```js
+// Example
+const item = await fromUuid('<placehold_uuid>');
+const missingTags = ItemTags.missing(item, ['metal', 'wood']);
+// Checks which of the passed tags are missing from item
+```
+Checks which of the passed `tags` are missing from the `document`.
+
+## Delete All
+```js
+ItemTags.deleteAll(document: Document) -> void;
+```
+```js
+// Example
+const item = await fromUuid('<placehold_uuid>');
+ItemTags.deleteAll(item);
+// Deletes all tags from item
+```
+Deletes all the tags from the passed `document`.

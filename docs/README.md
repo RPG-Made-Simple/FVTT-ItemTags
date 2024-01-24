@@ -45,7 +45,7 @@ Open the `Tags` button and drag the `Tag` to its new position.
 </p>
 
 ## Editing Tags
-Open the `Tags` button and double-clic the **name** of a `Tag`, then press <kbd>Enter</kbd> to insert it again.
+Open the `Tags` button and double-click the **name** of a `Tag`, then press <kbd>Enter</kbd> to insert it again.
 
 <p align="center">
     <img src="https://docs.rpgmadesimple/FVTT-ItemTags/#/images/editing-tags.gif" alt="Editing Tags">
