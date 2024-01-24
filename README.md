@@ -20,11 +20,11 @@ Do you like the module? Consider supporting it :)
 <a href='https://ko-fi.com/T6T8IFCB5' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## Note for Developers (modules and macros)
-Take a look at the [Documentation](https://docs.rpgmadesimple/FVTT-ItemTags).
+Take a look at the [Documentation](https://docs.rpgmadesimple.com/FVTT-ItemTags).
 
 ## Main Features
 - Insert `Tags` in almost all types of document
-- Interact with the `Tags` using the [API](https://docs.rpgmadesimple/FVTT-ItemTags/#/apiReference/)
+- Interact with the `Tags` using the [API](https://docs.rpgmadesimple.com/FVTT-ItemTags/#/apiReference/)
 
 ## API Example
 ```js
