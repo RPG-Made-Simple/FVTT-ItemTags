@@ -11,7 +11,7 @@ const isMetallic = ItemTags.get(item);
 // Will return the tags of the passed item
 ```
 
-Returns `Array` of `String` containing all the tags of the passed `document`. If no tags are found, it returns `undefined`.
+Returns `Array` of `String` containing all the tags of the passed `document`. If no tags are found, it returns an empty `Array`.
 
 ## Check Tags
 ```js
