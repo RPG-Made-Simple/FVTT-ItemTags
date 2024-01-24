@@ -5,7 +5,7 @@
 Hooks.once('item-tags.ready', () => {
     // ...
 });
-// Will execute something when toolbox is ready
+// Will execute something when ItemTags is ready
 ```
 Main hook of the module, gets called after `ready`.
 
