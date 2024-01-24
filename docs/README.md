@@ -10,7 +10,7 @@ A FoundryVTT library that provides a way to insert and manage tags across all do
 
 > This library was part of [OIF](https://github.com/ZotyDev/objects-interactions-fx) and now is standalone since I think it can be very beneficial to other developers (even myself in the future!). Feel free to use it to do anything! If you have questions, join my discord or leave a issue, I will help you asap.
 
-**If you are a developer, you are looking for [this](apireference/)**
+**If you are a developer, you are looking for [this](apiReference/)**
 
 ## API Example
 ```js
