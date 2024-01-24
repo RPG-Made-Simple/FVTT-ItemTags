@@ -39,6 +39,6 @@ Will get called before any amount of tags are changed somewhere.
 Hooks.on('item-tags.tag.pos-set', (options) => {
     // ...
 });
-// Will always excute after tags get changed somewhere
+// Will always execute after tags get changed somewhere
 ```
-Will get called after any amount of tags are changed somwhere.
+Will get called after any amount of tags are changed somewhere.
