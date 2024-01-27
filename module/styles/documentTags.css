@@ -29,6 +29,7 @@
 }
 .item-tags .tag-container .tag .icon {
   margin: 0px 4px 0 4px;
+  background-color: transparent !important;
 }
 .item-tags .tag-container .on-drag {
   background-color: rgb(170, 105, 212);

@@ -1,5 +1,9 @@
 # Item Tags Changelog
 
+## Version
+
+- *Interface* - The `icon` SASS class now defines the `background-color` as `transparent` to prevent a bug that made the icon completely black on some systems.
+
 ## Version 1.2.0
 
 - *Github* - Moved project from [ZotyDev](https://github.com/ZotyDev) to [RPG Made Simple](https://github.com/RPG-Made-Simple).
