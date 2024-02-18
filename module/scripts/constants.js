@@ -10,12 +10,12 @@
 // ? Here are all the constants used by ItemTags, all static values are and
 // ? must be here
 export class Constants {
-    static ID = 'item-tags';
-    static NAME_FLAT = 'Item Tags';
-    static NAME = `🏷️ ${Constants.NAME_FLAT}`;
-    static FLAGS = {
-        TAGS: 'tags',
-    }
-    static PACKETS = {};
-    static D;
+  static ID = 'item-tags';
+  static NAME_FLAT = 'Item Tags';
+  static NAME = `🏷️ ${Constants.NAME_FLAT}`;
+  static FLAGS = {
+    TAGS: 'tags',
+  }
+  static PACKETS = {};
+  static D;
 }

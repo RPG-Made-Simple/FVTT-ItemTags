@@ -1,13 +1,13 @@
 <a href="https://foundryvtt.com/packages/item-tags">
-    <p align="center">
-        <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/branding/title.png" alt="Item Tags Title">
-    </p>
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/branding/title.png" alt="Item Tags Title">
+  </p>
 </a>
 
 <p align="center">
-    <a href="https://discord.gg/RAgPXB4zG7">
-        <img src="https://discord.com/api/guilds/1071251491375042661/widget.png?style=shield"/>
-    </a>
+  <a href="https://discord.gg/RAgPXB4zG7">
+    <img src="https://discord.com/api/guilds/1071251491375042661/widget.png?style=shield"/>
+  </a>
 </p>
 
 A FoundryVTT library that provides a way to insert and manage tags across all documents. This is useful for storing simple data that can help modules and macros create generic code and reuse it easily, it also allows some type of customization. The idea of tagging Items was born because I don't use English in my sessions, and relying of autodetect based on names was going to be too much for me to handle.
@@ -29,9 +29,9 @@ Take a look at the [Documentation](https://docs.rpgmadesimple.com/FVTT-ItemTags)
 ## API Example
 ```js
 if (ItemTags.Check(game.items.get("<id>"), ['metal'])) {
-    console.log('The tag is set');
+  console.log('The tag is set');
 } else {
-    console.log('The tag is not set');
+  console.log('The tag is not set');
 }
 ```
 
@@ -48,21 +48,21 @@ Open a supported document and find the `Tags` button, click it, insert the `Tag`
 Open the `Tags` button and click on the `X` on the tag you want to remove. You need to confirm when removing tags.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/removing-tags.gif" alt="Removing Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/removing-tags.gif" alt="Removing Tags">
 </p>
 
 ## Reordering Tags
 Open the `Tags` button and drag the `Tag` to its new position.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/reordering-tags.gif" alt="Reordering Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/reordering-tags.gif" alt="Reordering Tags">
 </p>
 
 ## Editing Tags
 Open the `Tags` button and double-click the **name** of a `Tag`, then press <kbd>Enter</kbd> to insert it again.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/editing-tags.gif" alt="Editing Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/editing-tags.gif" alt="Editing Tags">
 </p>
 
 <h2 align="center"> <a href="https://github.com/RPG-Made-Simple/FVTT-ItemTags/blob/main/CHANGELOG.md"> Changelog</a></h2>

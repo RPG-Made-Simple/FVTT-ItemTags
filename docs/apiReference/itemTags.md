@@ -24,14 +24,14 @@ const isMetallic = ItemTags.check(item, ['metal']);
 // Checks if the passed item has the metal tag
 ```
 - `method` - Defines what filtering method will be used, this value can be:
-    - `'includeAND'`
-      - Only shows results that contain **all** the passed tags
-    - `'excludeAND'`
-      - Only shows results that **don't** contain **all** the passed tags
-    - `'includeOR'`
-      - Only show results that contain **at least one** of the passed tags
-    - `'excludeOR'`
-      - Only show results that **don't** contain **at least one** of the passed tags
+  - `'includeAND'`
+    - Only shows results that contain **all** the passed tags
+  - `'excludeAND'`
+    - Only shows results that **don't** contain **all** the passed tags
+  - `'includeOR'`
+    - Only show results that contain **at least one** of the passed tags
+  - `'excludeOR'`
+    - Only show results that **don't** contain **at least one** of the passed tags
 
 Returns `true` if the check passes with the passed `method`, otherwise returns `false`.
 
@@ -46,14 +46,14 @@ const hasDagger = ItemTags.checkString(item, 'dagger', 'includeOR');
 // Checks if the passed item has the string 'dagger' in at least one tag
 ```
 - `method` - Defines what filtering method will be used, this value can be:
-    - `'includeAND'`
-      - Only show the results when **all** contained tags have the string
-    - `'excludeAND'`
-      - Only show the results when **all** the contained tags **don't** contain the string
-    - `'includeOR'`
-      - Only show results when **at least one** of the tags contain the string
-    - `'excludeOR'`
-      - Only show results when **at least one** of the tags **don't** contain the string
+  - `'includeAND'`
+    - Only show the results when **all** contained tags have the string
+  - `'excludeAND'`
+    - Only show the results when **all** the contained tags **don't** contain the string
+  - `'includeOR'`
+    - Only show results when **at least one** of the tags contain the string
+  - `'excludeOR'`
+    - Only show results when **at least one** of the tags **don't** contain the string
 
 Returns `true` if the check passes with the passed `method`, otherwise returns `false`.
 
@@ -159,22 +159,22 @@ ItemTags.searchAll(options: Object) -> Object;
 **Returns a `Object` like this:**
 ```js
 {
-    // If a category has no results, it will be undefined, i.e:
-    // no global actors got found, so actors.global will be undefined
-    // If all the values from a type are undefined, it will be undefined too, i.e:
-    // actors.global, actors.scene and actors.player are undefined, so actors will be undefined
-    // If actors and items are undefined, them the returning value of the method will be undefined too
-    actors: { // The actors that got found
-        global: [] // From the actor directory
-        scene: [] // From the current scene
-        player: [] // From the players
-    }
-    items: { // The items that got found
-        global: [] // From the item directory
-        actor: [] // From the actor directory
-        scene: [] // From the current scene
-        player: [] // From the players
-    }
+  // If a category has no results, it will be undefined, i.e:
+  // no global actors got found, so actors.global will be undefined
+  // If all the values from a type are undefined, it will be undefined too, i.e:
+  // actors.global, actors.scene and actors.player are undefined, so actors will be undefined
+  // If actors and items are undefined, them the returning value of the method will be undefined too
+  actors: { // The actors that got found
+    global: [] // From the actor directory
+    scene: [] // From the current scene
+    player: [] // From the players
+  }
+  items: { // The items that got found
+    global: [] // From the item directory
+    actor: [] // From the actor directory
+    scene: [] // From the current scene
+    player: [] // From the players
+  }
 }
 ```
 
@@ -189,12 +189,12 @@ Thats it, simple as that.
 Now one that is a little bit more complex, imagine you want to find all the items on your world that are **not** made of metal, for this scenario consider that you have tagged the metallic items as `metal`:
 ```js
 ItemTags.searchAll({
-    tags: ['metal'],
-    method: 'excludeOR', // You could use 'excludeAND' too if you have only one tag to search
-    where: {
-        actor: false, // We just want items
-        item: true, // We want to find ALL the items
-    }
+  tags: ['metal'],
+  method: 'excludeOR', // You could use 'excludeAND' too if you have only one tag to search
+  where: {
+    actor: false, // We just want items
+    item: true, // We want to find ALL the items
+  }
 })
 ```
 
@@ -203,17 +203,17 @@ The returned Object will contain only items that **don't** have the metal tag se
 Lets imagine a more realistic use, lets say we have a spell that makes all magical wooden items in a area turn into dust and vanish, you could get all the wooden items like this:
 ```js
 ItemTags.searchAll({
-    tags: ['wood', 'magic'], // We want magical wooden items to be affected, not only wood, not only magic
-    method: 'includeAND', // Since we want the items with BOTH tags set, we need to use includeAND
-    where: {
-        actor: false, // We are not searching for actors, just items
-        item: {
-            global: false, // We don't need it
-            actor: false, // We don't need it
-            scene: true, // The only option we need, items that are inside a actor from the current scene
-            player: false, // We don't need it
-        }
+  tags: ['wood', 'magic'], // We want magical wooden items to be affected, not only wood, not only magic
+  method: 'includeAND', // Since we want the items with BOTH tags set, we need to use includeAND
+  where: {
+    actor: false, // We are not searching for actors, just items
+    item: {
+      global: false, // We don't need it
+      actor: false, // We don't need it
+      scene: true, // The only option we need, items that are inside a actor from the current scene
+      player: false, // We don't need it
     }
+  }
 })
 ```
 The returned Object will contain only the items that have **both** the `wood` and `magic` tags set.
@@ -249,8 +249,8 @@ Usage example: lets say you taged all the items on your world, and the items tha
 ```js
 let actor = ... // Where you are getting your actor Object from
 ItemTags.searchActor(actor, {
-    string: 'light_', // String that will be used on the search
-    method: 'includeOR', // At least one tag must contain the string
+  string: 'light_', // String that will be used on the search
+  method: 'includeOR', // At least one tag must contain the string
 })
 ```
 This way we will search all the items of a actor and only the ones that have atleast one tag with the `light_` string inside of it will be returned.

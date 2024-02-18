@@ -1,8 +1,10 @@
 # Item Tags Changelog
 
-## Version
+## Version 1.3.0
 
 - *Interface* - The `icon` SASS class now defines the `background-color` as `transparent` to prevent a bug that made the icon completely black on some systems.
+- *Interface* - Added a `hover` effect for the tags.
+- *Internal* - Changed identation from `4` spaces to `2` spaces.
 
 ## Version 1.2.0
 

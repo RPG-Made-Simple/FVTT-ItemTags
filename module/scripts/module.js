@@ -21,60 +21,60 @@ import { ItemTagsLayer } from "./itemTagsLayer.js";
 // Entry-point for everything
 ////////////////////////////////////////////////////////////////////////////////
 Hooks.once('init', () => {
-    Hooks.once('toolbox.ready', async () => {
-        // Register the module for showcase
-        Toolbox.showcaseModule(C.NAME_FLAT);
+  Hooks.once('toolbox.ready', async () => {
+    // Register the module for showcase
+    Toolbox.showcaseModule(C.NAME_FLAT);
 
-        ItemTags.initialize();
+    ItemTags.initialize();
 
-        // Setup the API and methods
-        window['ItemTags'] = {
-            // Deprecated naming
-            Get: TagHandler.getTags,
-            Check: TagHandler.checkTags,
-            CheckString: TagHandler.checkTagsString,
-            Set: TagHandler.setTags,
-            Add: TagHandler.addTags,
-            Remove: TagHandler.removeTags,
-            Clear: TagHandler.deleteTags,
-            SearchAll: TagHandler.searchAll,
-            SearchActor: TagHandler.searchActor,
-            DeleteAll: TagHandler.deleteTags,
-            Missing: TagHandler.checkTagsMissing,
+    // Setup the API and methods
+    window['ItemTags'] = {
+      // Deprecated naming
+      Get: TagHandler.getTags,
+      Check: TagHandler.checkTags,
+      CheckString: TagHandler.checkTagsString,
+      Set: TagHandler.setTags,
+      Add: TagHandler.addTags,
+      Remove: TagHandler.removeTags,
+      Clear: TagHandler.deleteTags,
+      SearchAll: TagHandler.searchAll,
+      SearchActor: TagHandler.searchActor,
+      DeleteAll: TagHandler.deleteTags,
+      Missing: TagHandler.checkTagsMissing,
 
-            // New naming
-            get: TagHandler.getTags,
-            check: TagHandler.checkTags,
-            checkString: TagHandler.checkTagsString,
-            set: TagHandler.setTags,
-            add: TagHandler.addTags,
-            remove: TagHandler.removeTags,
-            clear: TagHandler.deleteTags,
-            searchAll: TagHandler.searchAll,
-            searchActor: TagHandler.searchActor,
-            deleteAll: TagHandler.deleteTags,
-            missing: TagHandler.checkTagsMissing,
-        }
-
-        // Informs that ItemTags is ready to be used
-        Hooks.call('item-tags.ready');
-
-        // Debug
-        C.D.info('Ready!!');
-    });
-
-    // Debug info
-    Hooks.once('debugger.ready', () => {
-        C.D = new Debugger(C.ID, C.NAME, true, true);
-        C.D.info('Module Information:');
-        C.D.info(`Version ${game.modules.get(C.ID).version}`);
-        C.D.info('Library By ZotyDev');
-    });
-
-    // Setup the layer where the interface will be
-    CONFIG.Canvas.layers['itemTags'] = {
-        group: 'interface',
-        layerClass: ItemTagsLayer,
+      // New naming
+      get: TagHandler.getTags,
+      check: TagHandler.checkTags,
+      checkString: TagHandler.checkTagsString,
+      set: TagHandler.setTags,
+      add: TagHandler.addTags,
+      remove: TagHandler.removeTags,
+      clear: TagHandler.deleteTags,
+      searchAll: TagHandler.searchAll,
+      searchActor: TagHandler.searchActor,
+      deleteAll: TagHandler.deleteTags,
+      missing: TagHandler.checkTagsMissing,
     }
+
+    // Informs that ItemTags is ready to be used
+    Hooks.call('item-tags.ready');
+
+    // Debug
+    C.D.info('Ready!!');
+  });
+
+  // Debug info
+  Hooks.once('debugger.ready', () => {
+    C.D = new Debugger(C.ID, C.NAME, true, true);
+    C.D.info('Module Information:');
+    C.D.info(`Version ${game.modules.get(C.ID).version}`);
+    C.D.info('Library By ZotyDev');
+  });
+
+  // Setup the layer where the interface will be
+  CONFIG.Canvas.layers['itemTags'] = {
+    group: 'interface',
+    layerClass: ItemTagsLayer,
+  }
 });
 

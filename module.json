@@ -1,55 +1,60 @@
 {
-    "id": "item-tags",
-    "title": "🏷️ Item Tags (Library)",
-    "description": "Library that lets you insert tags into documents.",
-    "version": "1.2.0",
-    "library": true,
-    "authors": [
-        {
-            "name": "ZotyDev",
-            "email": "official@zoty.dev",
-            "url": "https://zoty.dev",
-            "discord": "zotydev",
-            "flags": {}
-        }
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "module/lang/en.json",
-            "flags": {}
-        }
-    ],
-    "compatibility": {
-        "minimum": "10",
-        "verified": "11"
-    },
-    "license": "./LICENSE",
-    "url": "https://github.com/ZotyDev/FoundryVTT-ItemTags",
-    "bugs": "https://github.com/ZotyDev/FoundryVTT-ItemTags/issues",
-    "manifest": "https://github.com/ZotyDev/FoundryVTT-ItemTags/releases/latest/download/module.json",
-    "download": "https://github.com/ZotyDev/FoundryVTT-ItemTags/releases/latest/download/module.zip",
-    "readme": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/README.md",
-    "changelog": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md",
-    "relationships": {
-        "requires": [
-            {
-                "id": "debugger",
-                "type": "module",
-                "compatibility": {}
-            },
-            {
-                "id": "toolbox",
-                "type": "module",
-                "compatibility": {}
-            }
-        ]
-    },
-    "esmodules": [
-        "./module/scripts/module.js"
-    ],
-    "styles": [
-        "module/styles/documentTags.css"
+  "id": "item-tags",
+  "title": "🏷️ Item Tags (Library)",
+  "description": "Library that lets you insert tags into documents.",
+  "version": "1.3.0",
+  "library": true,
+  "authors": [
+    {
+      "name": "ZotyDev",
+      "email": "official@zoty.dev",
+      "url": "https://zoty.dev",
+      "discord": "zotydev",
+      "flags": {}
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "module/lang/en.json",
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11"
+  },
+  "license": "./LICENSE",
+  "url": "https://github.com/ZotyDev/FoundryVTT-ItemTags",
+  "bugs": "https://github.com/ZotyDev/FoundryVTT-ItemTags/issues",
+  "manifest": "https://github.com/ZotyDev/FoundryVTT-ItemTags/releases/latest/download/module.json",
+  "download": "https://github.com/ZotyDev/FoundryVTT-ItemTags/releases/latest/download/module.zip",
+  "readme": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/README.md",
+  "changelog": "https://github.com/ZotyDev/FoundryVTT-ItemTags/blob/main/CHANGELOG.md",
+  "relationships": {
+    "requires": [
+      {
+        "id": "debugger",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "toolbox",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "packets",
+        "type": "module",
+        "compatibility": {}
+      }
     ]
+  },
+  "esmodules": [
+    "./module/scripts/module.js"
+  ],
+  "styles": [
+    "module/styles/documentTags.css"
+  ]
 }

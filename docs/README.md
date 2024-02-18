@@ -1,7 +1,7 @@
 <a href="https://foundryvtt.com/packages/item-tags">
-    <p align="center">
-        <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/branding/title.png" alt="Item Tags Title">
-    </p>
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/branding/title.png" alt="Item Tags Title">
+  </p>
 </a>
 
 ## What Item Tags is
@@ -15,9 +15,9 @@ A FoundryVTT library that provides a way to insert and manage tags across all do
 ## API Example
 ```js
 if (ItemTags.check(game.items.get("<id>"), ['metal'])) {
-    console.log('The tag is set');
+  console.log('The tag is set');
 } else {
-    console.log('The tag is not set');
+  console.log('The tag is not set');
 }
 ```
 
@@ -27,26 +27,26 @@ Open a supported document and find the `Tags` button, click it, insert the `Tag`
 > All the changes you do need to be confirmed, if you click on cancel the changes you made will be discarded.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/adding-tags.gif" alt="Adding Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/adding-tags.gif" alt="Adding Tags">
 </p>
 
 ## Removing Tags
 Open the `Tags` button and click on the `X` on the tag you want to remove. You need to confirm when removing tags.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/removing-tags.gif" alt="Removing Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/removing-tags.gif" alt="Removing Tags">
 </p>
 
 ## Reordering Tags
 Open the `Tags` button and drag the `Tag` to its new position.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/reordering-tags.gif" alt="Reordering Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/reordering-tags.gif" alt="Reordering Tags">
 </p>
 
 ## Editing Tags
 Open the `Tags` button and double-clic the **name** of a `Tag`, then press <kbd>Enter</kbd> to insert it again.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/editing-tags.gif" alt="Editing Tags">
+  <img src="https://raw.githubusercontent.com/RPG-Made-Simple/FVTT-ItemTags/main/images/editing-tags.gif" alt="Editing Tags">
 </p>

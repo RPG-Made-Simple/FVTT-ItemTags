@@ -1,27 +1,27 @@
 {
-    "itemTags": {
-        "warning": {
-            "duplicate": "This tag already exists."
-        },
-        "confirmation": {
-            "cancel": "Cancel",
-            "save": "Save",
-            "no": "No",
-            "yes": "Yes"
-        },
-        "tag": {
-            "placeholder": "new tag (press Enter to add)",
-            "deletion": {
-                "title": "Delete Tag?",
-                "description": "Do you really want to delete the \"$tag\" tag?"
-            }
-        },
-        "window": {
-            "itemTags": "Item Tags",
-            "globalTags": "Global Tags"
-        },
-        "tooltips": {
-            "globalTags": "Global Tags"
-        }
+  "itemTags": {
+    "warning": {
+      "duplicate": "This tag already exists."
+    },
+    "confirmation": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "no": "No",
+      "yes": "Yes"
+    },
+    "tag": {
+      "placeholder": "new tag (press Enter to add)",
+      "deletion": {
+        "title": "Delete Tag?",
+        "description": "Do you really want to delete the \"$tag\" tag?"
+      }
+    },
+    "window": {
+      "itemTags": "Item Tags",
+      "globalTags": "Global Tags"
+    },
+    "tooltips": {
+      "globalTags": "Global Tags"
     }
+  }
 }
