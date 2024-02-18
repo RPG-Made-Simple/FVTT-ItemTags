@@ -43,11 +43,6 @@
         "id": "toolbox",
         "type": "module",
         "compatibility": {}
-      },
-      {
-        "id": "packets",
-        "type": "module",
-        "compatibility": {}
       }
     ]
   },
